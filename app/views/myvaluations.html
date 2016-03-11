@@ -1,0 +1,42 @@
+<div ng-controller="MyvaluationsCtrl as ctrl">
+    <div class="page-header">
+        <h2 class="text-center text-success">{{ctrl.type}} IP Valuations</h2>
+    </div>
+    <div id="errorDiv" class="alert alert-danger" ng-show="ctrl.showError">
+        <a ng-href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Error!</strong> {{ctrl.errMsg}}
+    </div>
+    <div ng-show="ctrl.showResult">
+        <table class="table">
+            <thead>
+                <tr class="bg-primary">
+                    <th>#</th>
+                    <th>Date</th>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Method</th>
+                    <th>IP Valuation</th>
+                    <th ng-show="ctrl.isAdmin">User Name</th>
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td ng-show="ctrl.data.length==0">
+                        No data.
+                    </td>
+                </tr>
+                <tr ng-repeat="field in ctrl.data">
+                    <td>{{$index+1}}</td>
+                    <td>{{field.createdDate | date:"MM/dd/yyyy h:mma"}}</td>
+                    <td>{{field.idvaluation}}</td>
+                    <td>{{field.name}}</td>
+                    <td>{{field.valuationMethod}}</td>
+                    <td>{{field.valuation| currency:""}}</td>
+                    <th ng-show="ctrl.isAdmin">{{field.userName}}</th>
+                    <td class="text-center"><a ng-href="#/view/{{field.idvaluation}}">View</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

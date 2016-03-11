@@ -1,0 +1,51 @@
+<div>
+    <div class="page-header">
+        <h2 class="text-center text-success">User List</h2>
+    </div>
+    <div id="errorDiv" class="alert alert-danger" ng-show="ctrl.showError">
+        <a ng-href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Error!</strong> {{ctrl.errMsg}}
+    </div>
+    <div ng-show="ctrl.loading">
+        <img src="../images/loader.gif"><span class="text-primary bold"><strong>&nbsp;&nbsp;Loading ...</strong></span>
+        <br>
+        <br>
+    </div>
+    <div ng-show="ctrl.showList">
+        <table class="table">
+            <thead>
+                <tr class="bg-primary">
+                    <th>#</th>
+                    <th>Username</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>Role</th>
+                    <th>Institute</th>
+                    <th class="text-center">Action
+                        <a title="Add New Institute" class="btn btn-xs btn-success" ng-href="#/createUser">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        </a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td ng-show="ctrl.data.length==0">
+                        No User.
+                    </td>
+                </tr>
+                <tr ng-repeat="user in ctrl.userList">
+                    <td>{{$index+1}}</td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.name}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.mobile}}</td>
+                    <td>{{user.role}}</td>
+                    <td>{{user.institute}}</td>
+                    <td class="text-center"><a ng-href="#/profile/{{user.iduser}}/edit">Edit</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

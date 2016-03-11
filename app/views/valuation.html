@@ -1,318 +1,118 @@
 <div ng-controller="ValuationCtrl as ctrl">
-  <div class="page-header">
-  <h2 class="text-center text-success">Decision Support System for IP Valuation</h2>
-  </div>
-  <div ng-show="ctrl.showForm">
-<form class="form-horizontal" name="valuationForm" ng-submit="ctrl.submitForm(valuationForm.$valid)">
-  <div class="row">
-  <div class="form-group" ng-class="{ 'has-error' : valuationForm.name.$invalid && ctrl.submitted }">
-    <label class="col-md-3 control-label" for="technology">Name of the Technology*</label>
-    <div class="col-md-6">
-    <input type="text" class="form-control" name="name" ng-model="ctrl.data.name" placeholder="Technology" required>
-    <p ng-show="valuationForm.name.$invalid && ctrl.submitted " class="help-block">Name is required.</p>
-      </div>
-  </div>
+    <div class="page-header">
+        <h2 class="text-center text-success">Decision Support System for IP Valuation</h2>
     </div>
-  <div class="row">
-  <div class="form-group" ng-class="{ 'has-error' : valuationForm.institute.$invalid && !valuationForm.institute.$pristine }">
-    <label class="col-md-3 control-label"  for="institute">Institute/University*</label>
-    <div class="col-md-6">
-    <input type="text" class="form-control" name="institute" ng-model="ctrl.data.institute" placeholder="institute" required>
-      <p ng-show="valuationForm.institute.$invalid && !valuationForm.institute.$pristine" class="help-block">Institute is required.</p>
+    <div id="errorDiv" class="alert alert-danger" ng-show="ctrl.showError">
+        <a ng-href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Error!</strong> {{ctrl.errMsg}}
+    </div>
+    <div ng-show="ctrl.showForm">
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <form name="valuationForm" ng-submit="ctrl.submitForm(valuationForm.$valid)">
 
-      </div>
-  </div>
-    </div>
-  <div class="row">
-    <div class="form-group">
-    <label class="col-md-3 control-label"  for="method">Method of Valuation</label>
-    <div class="col-md-6">
-      <select class="form-control" name="method" ng-model="ctrl.data.valuationMethod" ng-options="value for value in ctrl.methodValues"></select>
-    </div>
-    </div>
-  </div>
-  <div class="row">
-       <div class="col-md-4">
-    <div class="panel panel-info">
-        <div class="panel-heading">Technology</div>
-    <div class="panel-body">
-        <div class="form-group">
-    <label class="col-md-3 control-label"  for="type">Type</label>
-    <div class="col-md-9">
-    <select class="form-control" name="type" ng-model="ctrl.data.techType" ng-options="value for value in ctrl.techTypes"></select>
-    </div>
-  </div>
-      
-     <div class="form-group">
-    <label class="col-md-3 control-label"  for="IP Category">IP Category</label>
-    <div class="col-md-9">
-      <select class="form-control" name="ip_category" ng-model="ctrl.data.ipCategory" ng-options="value for value in ctrl.ipCategoryValues"></select>
-    </div>
-  </div>
-    
-      <div class="form-group">
-    <label class="col-md-3 control-label"  for="IP State">IP State</label>
-    <div class="col-md-9">
-      <select class="form-control" name="ip_state" ng-model="ctrl.data.ipState" ng-options="value for value in ctrl.ipStateValues"></select>
-    </div>
-    </div>
-       </div>
-    </div>
-  </div>
-    
-    <div class="col-md-4">
-    <div class="panel panel-success">
-        <div class="panel-heading">Cost</div>
-    <div class="panel-body">
-      <h4> Fixed Cost for specific R & D</h4>
-  <div class="form-group">
-    <label class="col-md-8 control-label"  for="percentage">Depriciation Percentage</label>
-    <div class="col-md-4">
-    <input type="text" class="form-control" name="percentage" ng-model="ctrl.data.depPercent" placeholder="%">
-    </div>
-    </div>
-          <div class="form-group">
-    <label class="col-md-8 control-label"  for="fixed_cost">Incremental Fixed cost (If Any)</label>
-    <div class="col-md-4">
-    <input type="text" class="form-control" name="fixed_cost" ng-model="ctrl.data.fixedCost" placeholder="">
-    </div>
-    </div>
-            <h4> Variable Cost</h4>
-  <div class="form-group">
-    <label class="col-md-8 control-label"  for="operating_cost">Operating Cost</label>
-    <div class="col-md-4">
-    <input type="text" class="form-control" name="operating_cost" ng-model="ctrl.data.operatingCost" placeholder="">
-    </div>
-    </div>
-          <div class="form-group">
-    <label class="col-md-8 control-label"  for="salary">Salary</label>
-    <div class="col-md-4">
-    <input type="text" class="form-control" name="salary" ng-model="ctrl.data.salary" placeholder="">
-    </div>
-    </div>
-      <div class="form-group">
-    <label class="col-md-8 control-label"  for="admin">Admin Works</label>
-    <div class="col-md-4">
-    <input type="text" class="form-control" name="admin" ng-model="ctrl.data.adminCost" placeholder="">
-    </div>
-    </div>
-      <div class="form-group">
-    <label class="col-md-8 control-label"  for="other">Other Over Leads (If Any)</label>
-    <div class="col-md-4">
-    <input type="text" class="form-control" name="other" ng-model="ctrl.data.other" placeholder="">
-    </div>
-    </div>
-      <div class="form-group">
-    <label class="col-md-8 control-label"  for="Income Tax">Income Tax</label>
-    <div class="col-md-4">
-    <input type="text" class="form-control" name="income_tax" ng-model="ctrl.data.incomeTax" placeholder="">
-    </div>
-    </div>
-    </div>
-      </div>
-    </div>
-    
-            <div class="col-md-4">
-      <div class="panel panel-warning">
-        <div class="panel-heading">Market</div>
-    <div class="panel-body">
-       
-  <div class="form-group">
-    <label class="col-md-9 control-label"  for="similar_product">Does your technology has any similar or copetitor product?</label>
-    <div class="col-md-3">
-      <div class="radio"><label><input type="radio" name="similar_product" ng-model="ctrl.data.similarProduct" value="No" checked>No</label></div>
-      <div class="radio"><label><input type="radio" name="similar_product" ng-model="ctrl.data.similarProduct" value="Yes">Yes</label></div>
-    </div>
-  </div>
-      <div ng-show="ctrl.data.similarProduct =='Yes'">
-      <div class="form-group">
-    <label class="col-md-6 control-label"  for="comp_product">Copetitor Product</label>
-    <div class="col-md-6">
-      <input type="text" class="form-control" name="comp_product" ng-model="ctrl.data.compProduct" placeholder="">
-    </div>
-  </div>
-            <div class="form-group">
-    <label class="col-md-6 control-label"  for="sales_volume">Annual Sales Volume</label>
-    <div class="col-md-6">
-      <input type="text" class="form-control" name="sales_volume" ng-model="ctrl.data.salesVolume" placeholder="">
-    </div>
-  </div>
-            <div class="form-group">
-    <label class="col-md-6 control-label"  for="pricing startagy">Choice of Pricing Stratagy</label>
-    <div class="col-md-6">
-      <select class="form-control" ng-model="ctrl.data.pricingStratagy" ng-options="value for value in ctrl.pricingStratagy">
-      </select>
-    </div>
-  </div>
-            <div class="form-group">
-    <label class="col-md-6 control-label"  for="sales_plan">Licence/Sales Plan</label>
-    <div class="col-md-6">
-      <input type="text" class="form-control" name="sales_plan" ng-model="ctrl.data.salesPlan" placeholder="">
-    </div>
-  </div>
-            <div class="form-group">
-    <label class="col-md-6 control-label"  for="sales_expected">Expected Sales Growth</label>
-    <div class="col-md-6">
-        <select class="form-control" ng-model="ctrl.data.expectedGrowth" ng-options="value for value in ctrl.expectedGrowth">
-      </select>
-    </div>
-  </div>
-            <div class="form-group">
-    <label class="col-md-6 control-label"  for="royality_percnetage">% of Royality</label>
-    <div class="col-md-6">
-      <input type="text" class="form-control" name="royality_percnetage" ng-model="ctrl.data.royalityPercent" placeholder="">
-    </div>
-  </div>
-        <div class="form-group">
-    <label class="col-md-6 control-label"  for="bank_rate">Bank Rate/Discount Rate Percent</label>
-    <div class="col-md-6">
-      <input type="text" class="form-control" name="bank_rate" ng-model="ctrl.data.bankRate" placeholder="">
-    </div>
-  </div>
-        <div class="form-group">
-    <label class="col-md-6 control-label"  for="profit_percentage">Profit Percent</label>
-    <div class="col-md-6">
-      <input type="text" class="form-control" name="profit_percentage" ng-model="ctrl.data.profitPercent" placeholder="">
-    </div>
-  </div>
-      </div>
-    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-5" ng-class="{ 'has-error' : valuationForm.name.$invalid && ctrl.submitted }">
+                            <label class="control-label" for="technology">Name of the Technology*</label>
+                            <input type="text" class="form-control" name="name" ng-model="ctrl.data.name" placeholder="Technology" required>
+                            <p ng-show="valuationForm.name.$invalid && ctrl.submitted " class="help-block">Name is required.</p>
+                        </div>
+                        <div class="form-group col-sm-5" ng-class="{ 'has-error' : valuationForm.institute.$invalid && !valuationForm.institute.$pristine }">
+                            <label class="control-label" for="institute">Institute/University*</label>
+
+                            <autocomplete name="institute" ng-model="ctrl.data.institute" attr-placeholder="institute" data="ctrl.instituteList" click-activation=true attr-input-class="form-control" autocomplete-required></autocomplete>
+
+                            <p ng-show="valuationForm.institute.$invalid && !valuationForm.institute.$pristine" class="help-block">Institute is required.</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-5" ng-class="{ 'has-error' : valuationForm.developedBy.$invalid && ctrl.submitted }">
+                            <label class="control-label" for="developedBy">Developed By*</label>
+                            <input type="text" class="form-control" name="developedBy" ng-model="ctrl.data.developedBy" placeholder="Name of Developer" required>
+                            <p ng-show="valuationForm.developedBy.$invalid && ctrl.submitted " class="help-block">Name is required.</p>
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label class="control-label" for="contact">Contact Email</label>
+                            <input type="text" class="form-control" name="contact_email" ng-model="ctrl.data.contactEmail" placeholder="Email" required>
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label class="control-label" for="contact">Contact Mobile</label>
+                            <input type="text" class="form-control" name="contact_mobile" ng-model="ctrl.data.contactMobile" placeholder="Mobile" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-sm-5">
+                            <label class="control-label" for="type">Technology </label>
+                            <select class="form-control" name="technology" ng-model="ctrl.data.technology" ng-change="ctrl.changeTechTypes()" ng-options="value.name as value.name for value  in ctrl.technologies">
+                            </select>
+
+                        </div>
+                        <div class="form-group col-sm-5">
+                            <label class="control-label" for="type">Type </label>
+                            <select class="form-control" name="type" ng-model="ctrl.data.techType" ng-options="value for value in ctrl.techTypes">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-5">
+                            <label class="control-label" for="IP Category">IP Category</label>
+                            <select class="form-control" name="ip_category" ng-model="ctrl.data.ipCategory" ng-options="value for value in ctrl.ipCategoryValues"></select>
+                        </div>
+
+                        <div class="form-group col-sm-5">
+                            <label class="control-label" for="IP State">IP State</label>
+                            <select class="form-control" name="ip_state" ng-model="ctrl.data.ipState" ng-options="value for value in ctrl.ipStateValues"></select>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-5">
+                            <label class="control-label" for="method">Method of Valuation</label>
+                            <select class="form-control" name="method" ng-model="ctrl.data.valuationMethod" ng-change="ctrl.changeFields()" ng-options="value for value in ctrl.methodValues"></select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row bg-info">
+                        <label class="col-xs-12">Valuation Data</label>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div ng-repeat="field in ctrl.selectedFields">
+                            <div class="clearfix" ng-if="$index % 3 == 0"></div>
+                            <!-- TEXT FIELDS -->
+                            <div ng-if="field.type=='text' ||field.type=='number' " class="col-sm-4 form-group">
+                                <label class="control-label">{{field.label}} </label>
+
+                                <a ng-if="field.helpText" href="" data-toggle="popover" data-trigger="focus" role="button" data-placement="right" data-content={{field.helpText}}>
+                                    <span class="glyphicon glyphicon-question-sign"></span>
+                                </a>
+                                <input class="form-control" custom-attr content="field" ng-model="ctrl.data[field.name]"></input>
+
+                                <!-- <input type="{{ field.type }}" name={{field.name}} id="{{field.name}}" data-ng-model="ctrl.data.{{field.name}}" class="form-control" required/> -->
+                                <!--<span ng-show="myForm.{{field.name}}.$dirty && myForm.{{field.name}}.$error.required">Required!</span>.-->
+                            </div>
+                            <!-- SELECT FIELDS -->
+                            <div ng-if="field.type=='select'" class="col-sm-4 form-group">
+                                <label class="control-label">{{field.label}} </label>
+
+                                <a ng-if="field.helpText" href="" data-toggle="popover" data-trigger="focus" role="button" data-placement="right" data-content={{field.helpText}}>
+                                    <span class="glyphicon glyphicon-question-sign"></span>
+                                </a>
+                                <select class="form-control" custom-attr content="field" ng-model="ctrl.data[field.name]" ng-options="value for value in field.options" ng-change="ctrl.changeRate(field.name)"></select>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-  </div>
-  <hr>
-
-  <div class="row">
-    <div class="col-md-12 text-center">
-  <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
-  </div>
-</form>
-</div>
-
-<div ng-show="ctrl.showResult">
-  <div class="col-sm-offset-1 col-sm-9">
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-    <h3 class="panel-title">Valuation Result</h3>
-  </div>
-  <div class="panel-body">
-    <div class="row">
-    <label class="col-xs-5 text-right" >Name of the Technology</label>
-     <span class="col-xs-6" >{{ctrl.data.name}}</span>
-    </div>
-  <div class="row">
-    <label class="col-xs-5 text-right" >Institute/University</label>
-    <span class="col-xs-6" >{{ctrl.data.institute}}</span>
-    </div>
-  <div class="row">
-    <label class="col-xs-5 text-right" >Valuation Method</label>
-    <span class="col-xs-6" >{{ctrl.data.valuationMethod}}</span>
-    </div>
-    <div class="row bg-info">
-    <label class="col-xs-12">Technology</label>
-    </div>
-    <div class="row">
-    <label class="col-xs-5 text-right"  for="type">Type</label>
-    <span class="col-xs-6 " >{{ctrl.data.techType}}</span>
-    </div>
-    <div class="row">
-    <label class="col-xs-5 text-right"  for="IP Category">IP Category</label>
-    <span class="col-xs-6"  for="IP Category">{{ctrl.data.ipCategory}}</span>
-    </div>
-    <div class="row">
-    <label class="col-xs-5 text-right"  for="IP State">IP State</label>
-    <span class="col-xs-6"  for="IP State">{{ctrl.data.ipState}}</span>
-    </div>
-      <div class="row bg-success">
-    <label class="col-xs-12">Cost</label>
-    </div>
-    <h4> Fixed Cost for specific R & D</h4>
-    <div class="row">
-    <label class="col-xs-5 text-right">Depriciation Percentage</label>
-      <span class="col-xs-6" > {{ctrl.data.depPercent| percentage}}</span>
-    </div>
-    <div class="row">
-    <label class="col-xs-5 text-right">Incremental Fixed cost (If Any)</label>
-      <span  class="col-xs-6"> {{ctrl.data.fixedCost| currency:""}}</span>
-    </div>
-    <h4> Variable Cost</h4>
-    <div class="row">
-    <label class="col-xs-5 text-right">Operating Cost</label>
-      <span  class="col-xs-6"> {{ctrl.data.operatingCost| currency:""}}</span>
-    </div>
-    <div class="row">
-    <label class="col-xs-5 text-right">Salary</label>
-      <span  class="col-xs-6">{{ctrl.data.salary| currency:""}}</span>
-    </div>
-    <div class="row">
-    <label class="col-xs-5 text-right">Admin Works</label>
-      <apan  class="col-xs-6"> {{ctrl.data.adminCost| currency:""}}</apan>
-    </div>
-    <div class="row">
-    <label class="col-xs-5 text-right">Other Over Leads (If Any)</label>
-      <span  class="col-xs-6"> {{ctrl.data.other| currency:""}}</span>
-    </div>
-    <div class="row">
-    <label class="col-xs-5 text-right">Income Tax</label>
-      <span  class="col-xs-6"> {{ctrl.data.incomeTax| currency:"&#8377;"}}</span>
-    </div>
-      <div class="row bg-warning">
-    <label class="col-xs-12">Market</label>
-    </div>
-      <div class="row">
-    <label class="col-xs-5 text-right">Does your technology has any similar or copetitor product?</label>
-        <span class="col-xs-6">{{ctrl.data.similarProduct}}</span>
-    </div>
-      <div ng-show="ctrl.data.similarProduct =='Yes'">
-      <div class="row">
-    <label class="col-xs-5 text-right">Copetitor Product</label>
-        <span class="col-xs-6">{{ctrl.data.compProduct}}</span>
-    </div>
-    <div class="row">
-    <label class="col-xs-5 text-right">Annual Sales Volume</label>
-      <span class="col-xs-6">{{ctrl.data.salesVolume}}</span>
-    </div>
-    <div class="row">
-    <label class="col-xs-5 text-right">Choice of Pricing Stratagy</label>
-      <span class="col-xs-6">{{ctrl.data.pricingStratagy}}</span>
-    </div>
-    <div class="row">
-    <label class="col-xs-5 text-right">Licence/Sales Plan</label>
-      <span class="col-xs-6">{{ctrl.data.salesPlan}}</span>
-    </div>
-    <div class="row">
-    <label class="col-xs-5 text-right">Expected Sales Growth</label>
-      <span class="col-xs-6">{{ctrl.data.expectedGrowth}}</span>
-  </div>
-  <div class="row">
-    <label class="col-xs-5 text-right">% of Royality</label>
-    <span class="col-xs-6">{{ctrl.data.royalityPercent| percentage}}</span>
-  </div>
-  <div class="row">
-    <label class="col-xs-5 text-right">Bank Rate/Discount Rate Percent</label>
-    <span class="col-xs-6">{{ctrl.data.bankRate| percentage}}</span>
-  </div>
-  <div class="row">
-    <label class="col-xs-5 text-right">Profit Percent</label>
-    <span class="col-xs-6">{{ctrl.data.profitPercent| percentage}}</span>
-  </div>
-    </div>
-   </div>
-  <div class="panel-footer bg-danger">
-     <div class="row">
-      <label class="col-xs-5 text-right" >IP Valuation</label>
-    <span class="col-xs-6 control-label" >{{ctrl.result.valuation| currency:"&#8377;"}}</span>
-    </div>
-</div>
-  </div>
-     <div class="row">
-    <div class="col-md-12 text-center">
-  <button type="button" ng-click="ctrl.editValuation()" class="btn btn-primary">Edit</button>
-    </div>
-  </div>
-  </div>
-</div>
 </div>
 <br>
 <br>
