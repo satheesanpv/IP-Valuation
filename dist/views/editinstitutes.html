@@ -1,0 +1,66 @@
+<div> <div class="page-header"> <h2 class="text-center text-success">Institute List</h2> </div> <div id="errorDiv" class="alert alert-danger" ng-show="ctrl.showError"> <a ng-href="" class="close" data-dismiss="alert" aria-label="close">&times;</a> <strong>Error!</strong> {{ctrl.errMsg}} </div> <div id="successDiv" class="alert alert-success" ng-show="ctrl.showSuccess"> <a ng-href="" class="close" data-dismiss="alert" aria-label="close">&times;</a> <strong>SUCCESS</strong> Institute List updated!! </div> <div class="col-md-offset-1 col-md-10"> <table class="table table-hover"> <thead> <th># <th>Name <th>Location <th>District <th>State <th width="15%" align="center" style="text-align: center">Action <button title="Add New Institute" class="btn btn-xs btn-success" ng-click="ctrl.showAdd()"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> </button> <button ng-show="ctrl.enableSave" title="Save Changes" class="btn btn-xs btn-primary" ng-click="ctrl.saveChanges()"> <span class="glyphicon glyphicon-save" aria-hidden="true"></span> </button>   <tbody> <tr ng-show="ctrl.isAdd" ng-include="ctrl.getTemplate()">  <tr ng-repeat="institute in ctrl.institutes" ng-include="ctrl.getTemplate(institute)">   </table> </div> <script type="text/ng-template" id="display"><td>{{$index+1}}</td>
+        <td>{{institute.name}}</td>
+        <td>{{institute.location}}</td>
+        <td>{{institute.district}}</td>
+        <td>{{institute.state}}</td>
+        <td width="15%" align="center">
+            <button title="Edit" class="btn btn-xs btn-primary" ng-click="ctrl.edit($index)">
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+            </button>
+        </td></script> <script type="text/ng-template" id="edit"><td>{{$index+1}}</td>
+        <td>
+            <input class="form-control" type="text" ng-model="ctrl.selected.name" />
+        </td>
+        <td>
+            <input class="form-control" type="text" ng-model="ctrl.selected.location" />
+        </td>
+        <td>
+            <input class="form-control" type="text" ng-model="ctrl.selected.district" />
+        </td>
+        <td>
+            <input class="form-control" type="text" ng-model="ctrl.selected.state" />
+        </td>
+        <td width="15%" align="center">
+            <div class="btn-group btn-group-sm" role="group">
+                <button title="Apply Changes" class="btn btn-xs btn-success" ng-click="ctrl.save($index)" ng-disabled="!ctrl.selected.name">
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                </button>
+                <button title="Cancel" class="btn btn-xs btn-warning" ng-click="ctrl.reset($index)">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </button>
+                <button title="Remove" class="btn btn-xs btn-danger" ng-click="ctrl.remove($index)">
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                </button>
+            </div>
+        </td></script> <script type="text/ng-template" id="add"><td>+</td>
+        <td>
+            <input class="form-control" type="text" ng-model="ctrl.selected.name" required />
+        </td>
+        <td>
+            <input class="form-control" type="text" ng-model="ctrl.selected.location" />
+        </td>
+        <td>
+            <input class="form-control" type="text" ng-model="ctrl.selected.district" />
+        </td>
+        <td>
+            <input class="form-control" type="text" ng-model="ctrl.selected.state" />
+        </td>
+        <td width="15%" align="center">
+            <div class="btn-group btn-group-sm" role="group">
+                <button title="Add" class="btn btn-xs btn-success" ng-click="ctrl.add()" ng-disabled="!ctrl.selected.name">
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                </button>
+                <button title="Cancel" class="btn btn-xs btn-warning" ng-click="ctrl.reset()">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </button>
+            </div>
+        </td></script> <script type="text/ng-template" id="remove"><td class="danger"><del>{{$index+1}}</del></td>
+        <td class="danger"><del>{{institute.name}}</del></td>
+        <td class="danger"><del>{{institute.location}}</del></td>
+        <td class="danger"><del>{{institute.district}}</del></td>
+        <td class="danger"><del>{{institute.state}}</del></td>
+        <td class="danger" width="15%" align="center">
+            <button title="Cancel" class="btn btn-xs btn-warning" ng-click="ctrl.undoRemove($index)">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            </button>
+        </td></script> </div>
