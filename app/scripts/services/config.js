@@ -49,7 +49,8 @@ angular.module('ipValuationApp')
                     label: 'Fixed costs specific to R&D*',
                     filter: 'currency',
                     methods: ['cost method'],
-                    required: 'required'
+                    required: 'required',
+                    helpText: 'Fixed Assets/ Buildings/Machinery etc in INR'
                 },
                 {
                     type: 'number',
@@ -58,7 +59,7 @@ angular.module('ipValuationApp')
                     label: 'Incremental Fixed Costs',
                     filter: 'currency',
                     methods: ['cost method'],
-                    helpText: 'This is Incremenat Fixed cost'
+                    helpText: 'Costs incurred if an already established equipment\'s/machinery had been used for R&D.'
                 },
                 {
                     type: 'number',
@@ -66,7 +67,8 @@ angular.module('ipValuationApp')
                     name: 'pp',
                     label: 'Price/Unit of Closly Compiting Product',
                     filter: 'currency',
-                    methods: ['market method']
+                    methods: ['market method'],
+                    helpText: 'Similar existing competing product price in INR'
                 },
                 {
                     type: 'number',
@@ -75,25 +77,46 @@ angular.module('ipValuationApp')
                     label: 'Product Price (Per Unit)*',
                     filter: 'currency',
                     methods: ['royalty method', 'profit split method'],
-                    required: 'required'
+                    helpText: 'Expected product price in INR'
+                },
+
+                {
+                    type: 'number',
+                    step: 0.01,
+                    name: 'sv',
+                    label: 'Units Sold Annualy*',
+                    filter: 'number',
+                    methods: ['market method'],
+                    required: 'required',
+                    helpText: 'Expected Sales Volume of similar competing product similar product sales volume'
                 },
                 {
                     type: 'number',
                     step: 0.01,
                     name: 'sv',
-                    label: 'Sales Volume (Annual)*',
+                    label: 'Sales Volumn*',
                     filter: 'number',
-                    methods: ['royalty method', 'market method', 'profit split method'],
-                    required: 'required'
+                    methods: ['royalty method', 'profit split method'],
+                    required: 'required',
+                    helpText: 'Expected Sales Volume of product annually'
                 },
-
+                {
+                    type: 'number',
+                    step: 0.01,
+                    name: 'r',
+                    label: 'Revenue *',
+                    filter: 'currency',
+                    methods: ['market method', 'royalty method', 'profit split method'],
+                    helpText: 'Expected Revenue of the product annually'
+                },
                 {
                     type: 'number',
                     step: 0.01,
                     name: 'p',
                     label: 'Expected Profits (in Percentage)',
                     filter: 'percentage',
-                    methods: ['cost method', 'market method']
+                    methods: ['cost method', 'market method'],
+                    helpText: 'Margin expected as profits (In percentage)'
                 },
                 {
                     type: 'number',
@@ -102,7 +125,8 @@ angular.module('ipValuationApp')
                     min: 0,
                     name: 'yr',
                     label: 'Expected Life of Technology',
-                    methods: ['royalty method', 'market method', 'profit split method']
+                    methods: ['royalty method', 'market method', 'profit split method'],
+                    helpText: 'Value in years'
                 },
                 {
                     type: 'number',
@@ -111,6 +135,7 @@ angular.module('ipValuationApp')
                     label: 'Discount Rate (%)',
                     methods: ['royalty method', 'market method'],
                     filter: 'percentage',
+                    helpText: 'Prevailing Bank rate/Discount rate'
                 },
                 {
                     type: 'number',
@@ -120,7 +145,8 @@ angular.module('ipValuationApp')
                     name: 'adc',
                     label: 'Administration Cost (yearly %)',
                     filter: 'percentage',
-                    methods: ['royalty method', 'market method']
+                    methods: ['market method'],
+                    helpText: 'Costs incurred for administration purposes'
                 },
                 {
                     type: 'number',
@@ -130,14 +156,16 @@ angular.module('ipValuationApp')
                     name: 'it',
                     label: 'Income Tax (per year %)',
                     filter: 'percentage',
-                    methods: ['royalty method', 'market method']
+                    methods: ['royalty method', 'market method'],
+                    helpText: 'At Institute Level if any tax paid (in percentage)'
                 },
                 {
                     type: 'select',
                     name: 'expectedGrowth',
                     label: 'Expected Sales Growth',
                     options: ['Business as Usual', 'Slow pace of technology adoption', 'Upside scenario', 'Manual'],
-                    methods: ['royalty method', 'market method', 'profit split method']
+                    methods: ['royalty method', 'market method', 'profit split method'],
+                    helpText: 'Expected sales growth of the product yearly'
                 },
                 {
                     type: 'number',
@@ -148,7 +176,8 @@ angular.module('ipValuationApp')
                     label: 'Growth Rate (%)',
                     filter: 'percentage',
                     methods: ['royalty method', 'market method', 'profit split method'],
-                    required: 'required'
+                    required: 'required',
+                    helpText: 'Value in percentage'
                 },
                 {
                     type: 'select',
@@ -156,6 +185,7 @@ angular.module('ipValuationApp')
                     label: 'Choice of pricing Strategy',
                     options: ['Same as competing product', 'Skimming', 'Penetrating', 'Manual'],
                     methods: ['royalty method', 'market method', 'profit split method'],
+                    helpText: 'Expected change in price of the product yearly'
                 },
                 {
                     type: 'number',
@@ -163,10 +193,11 @@ angular.module('ipValuationApp')
                     min: 0,
                     max: 200,
                     name: 'pr',
-                    label: 'Price Rate (%)',
+                    label: 'Pricing Factor (%)',
                     filter: 'percentage',
                     methods: ['royalty method', 'market method', 'profit split method'],
-                    required: 'required'
+                    required: 'required',
+                    helpText: 'Value in percentage. If the price of the product is x then next year product price will be x*(pf/100)'
                 },
             ],
             'cost method': [
@@ -183,13 +214,15 @@ angular.module('ipValuationApp')
                     max: 100,
                     name: 'd',
                     label: 'Depreciation rate (%)',
-                    filter: 'percentage'
+                    filter: 'percentage',
+                    helpText: 'Depreciation Rate of the Equipment\'s/machinery used for R&D. Rates Assumed for the equipments/machineries used. In Percentage'
                 }, {
                     type: 'number',
                     step: 0.01,
                     name: 'oc',
-                    label: 'Operating Costs( Value per year)',
-                    filter: 'currency'
+                    label: 'Operating Expense( Value per year)',
+                    filter: 'currency',
+                    helpText: 'Expenses Incurred for the Day to Day activities. One Time value in INR'
 
                 },
                 {
@@ -197,13 +230,15 @@ angular.module('ipValuationApp')
                     step: 0.01,
                     name: 's',
                     label: 'Salary',
-                    filter: 'currency'
+                    filter: 'currency',
+                    helpText: 'Expenses incurred as salaries to all associated Staff. Per Annum values in INR'
                 },
                 {
                     type: 'number',
                     step: 1,
                     name: 't',
-                    label: 'Time spent on R&D (in months)'
+                    label: 'Time spent on R&D (in months)',
+                    helpText: 'Time spent on development of the IP/Technology. Value in Months'
                 },
                 {
                     type: 'number',
@@ -227,7 +262,8 @@ angular.module('ipValuationApp')
                     step: 0.01,
                     name: 'ry',
                     label: 'Royalty Rate (%)',
-                    filter: 'percentage'
+                    filter: 'percentage',
+                    helpText: 'Expressed as percentage of Revenue'
                 }
             ],
             'profit split method': [
@@ -238,7 +274,8 @@ angular.module('ipValuationApp')
                     max: 100,
                     name: 'psh',
                     label: 'Profit Share(%)',
-                    filter: 'percentage'
+                    filter: 'percentage',
+                    helpText: 'Profit split rate[ 1:3 = 25% (1/(3+1))]'
                 },
                 {
                     type: 'number',
