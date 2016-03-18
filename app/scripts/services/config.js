@@ -45,7 +45,7 @@ angular.module('ipValuationApp')
                 {
                     type: 'number',
                     step: 0.01,
-                    name: 'fcr',
+                    name: 'fxa',
                     label: 'Fixed costs specific to R&D*',
                     filter: 'currency',
                     methods: ['cost method'],
@@ -201,12 +201,6 @@ angular.module('ipValuationApp')
                 },
             ],
             'cost method': [
-                {
-                    type: 'number',
-                    name: 'fxa',
-                    label: 'Fixed assets used for R&D',
-                    filter: 'currency'
-                },
                 {
                     type: 'number',
                     step: 0.01,
