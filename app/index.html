@@ -44,6 +44,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#/">Home</a></li>
                         <li><a ng-href="#/valuation">Valuation</a></li>
+                        <li><a ng-href="#/faq">FAQ</a></li>
                         <li ng-if="!isLoggedIn"><a ng-href="#/login">Login</a></li>
                         <li class="dropdown" ng-if="isLoggedIn">
                             <a target="_self" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ng-cloak>{{user.name}} <span class="caret"></span></a>
@@ -124,6 +125,7 @@
     <script src="scripts/controllers/editinstitutes.js"></script>
     <script src="scripts/controllers/profile.js"></script>
     <script src="scripts/controllers/userlist.js"></script>
+    <script src="scripts/controllers/faq.js"></script>
     <!-- endbuild -->
 </body>
 

@@ -12,6 +12,7 @@ angular.module('ipValuationApp')
 
         var self = this;
         var $ = $window.jQuery;
+        self.data = {};
         var user = userService.getUser();
         $('input').focus(function () {
             var element = $(this);
@@ -71,6 +72,42 @@ angular.module('ipValuationApp')
                 elem.focus();
             }
         };
+
+        self.updateRevenue = function () {
+
+            self.data.r = self.data.pp * self.data.sv;
+            self.data.rm = self.data.ppm * self.data.svm;
+
+            if (self.data.r > 0) {
+                $('#r').prop('disabled', true);
+            } else {
+                $('#r').prop('disabled', false);
+            }
+
+            if (self.data.rm > 0) {
+                $('#rm').prop('disabled', true);
+            } else {
+                $('#rm').prop('disabled', false);
+            }
+        };
+
+        $scope.$watch(function () {
+            return self.data.ppm
+        }, self.updateRevenue);
+
+        $scope.$watch(function () {
+            return self.data.sv
+        }, self.updateRevenue);
+
+
+        $scope.$watch(function () {
+            return self.data.svm
+        }, self.updateRevenue);
+
+        $scope.$watch(function () {
+            return self.data.pp
+        }, self.updateRevenue);
+
 
         self.changeFields = function () {
 
@@ -174,4 +211,4 @@ angular.module('ipValuationApp')
             }
         };
 
-}]);
+    }]);

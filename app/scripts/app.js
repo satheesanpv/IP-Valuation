@@ -112,6 +112,11 @@ angular
                     authorizedRoles: [USER_ROLES.admin]
                 }
             })
+            .when('/faq', {
+              templateUrl: 'views/faq.html',
+              controller: 'FaqCtrl',
+              controllerAs: 'faq'
+            })
             .otherwise({
                 redirectTo: '/'
             });

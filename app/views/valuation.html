@@ -1,6 +1,6 @@
 <div ng-controller="ValuationCtrl as ctrl">
     <div class="page-header">
-        <h2 class="text-center text-success">Decision Support System for IP Valuation</h2>
+        <h2 class="text-center text-success">Decision Support System for Technology Valuation</h2>
     </div>
     <div id="errorDiv" class="alert alert-danger" ng-show="ctrl.showError">
         <a ng-href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -27,7 +27,7 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-5" ng-class="{ 'has-error' : valuationForm.developedBy.$invalid && ctrl.submitted }">
-                            <label class="control-label" for="developedBy">Developed By*</label>
+                            <label class="control-label" for="developedBy">Valuated By*</label>
                             <input type="text" class="form-control" name="developedBy" ng-model="ctrl.data.developedBy" placeholder="Name of Developer" required>
                             <p ng-show="valuationForm.developedBy.$invalid && ctrl.submitted " class="help-block">Name is required.</p>
                         </div>
@@ -84,7 +84,7 @@
                             <div ng-if="field.type=='text' ||field.type=='number' " class="col-sm-4 form-group">
                                 <label class="control-label">{{field.label}} </label>
 
-                                <a ng-if="field.helpText" href="" data-toggle="popover" data-trigger="focus" role="button" data-placement="right" data-content={{field.helpText}}>
+                                <a ng-if="field.helpText" href="" data-toggle="popover" data-trigger="focus" tabindex="-1" role="button" data-placement="right" data-content={{field.helpText}}>
                                     <span class="glyphicon glyphicon-question-sign"></span>
                                 </a>
                                 <input class="form-control" custom-attr content="field" ng-model="ctrl.data[field.name]"></input>
@@ -96,7 +96,7 @@
                             <div ng-if="field.type=='select'" class="col-sm-4 form-group">
                                 <label class="control-label">{{field.label}} </label>
 
-                                <a ng-if="field.helpText" href="" data-toggle="popover" data-trigger="focus" role="button" data-placement="right" data-content={{field.helpText}}>
+                                <a ng-if="field.helpText" href="" data-toggle="popover" data-trigger="focus" tabindex="-1" role="button" data-placement="right" data-content={{field.helpText}}>
                                     <span class="glyphicon glyphicon-question-sign"></span>
                                 </a>
                                 <select class="form-control" custom-attr content="field" ng-model="ctrl.data[field.name]" ng-options="value for value in field.options" ng-change="ctrl.changeRate(field.name)"></select>

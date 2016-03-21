@@ -24,7 +24,7 @@ function costMethod($data)
     $data->d = $data->d > 0 ? $data->d : 10;
     
     
-    $ip = (($data->fcr+($data->fxa*$data->d/100)+$data->ifc+((($data->oc+$data->s)/12)*($data->t))+$data->oh)/($data->op))*(1+($data->p/100));
+    $ip = ((($data->fxa*$data->d/100)+$data->ifc+((($data->oc+$data->s)/12)*($data->t))+$data->oh)/($data->op))*(1+($data->p/100));
     
     addResult('Cost Method', $ip);
     
@@ -38,22 +38,21 @@ function royaltyMethod($data)
     
     $data->yr = $data->yr > 0 ? $data->yr : 4;
     $ip = 0;
-    $pp= $data->pp;
-    $sv = $data->sv;
-    $pr = $data->sv;
+    
+    $r = $data->r*($data->g/100);
     
     for ($i = 0; $i< $data->yr; $i++) {
-        error_log($i);
-        $pp= $pp*(105/100);
-        $sv=$sv*($g[$i]/100);
-        $r = $pp * $sv;
-        error_log($r);
+        
         $pbd = $r* ($data->ry/100);
         $pad = $pbd * (1-(($data->adc+$data->it)/100));
         //$pad = $pbd(1-($data->adc+$data->it)/100);
         $npv = $pad/pow((1+($data->dr/100)), $i+1);
         error_log($npv);
         $ip += $npv;
+        
+        $r= $r*(105/100);
+        $r=$r*(100.01/100);
+
          
     }
     
@@ -67,21 +66,21 @@ function marketMethod($data)
     
     $data->yr = $data->yr > 0 ? $data->yr : 4;
     $ip = 0;
-    $pp= $data->pp;
-    $sv = $data->sv;
+    $r= $data->rm * ($data->pr/100);
+    $r = $data->rm * ($data->g/100);
     
     for ($i = 0; $i< $data->yr; $i++) {
         error_log($i);
-        $pp= $pp*($pr[$i]/100);
-        $sv=$sv*($g[$i]/100);
-        $r = $pp * $sv;
         
         $pbd = $r* ($data->p/100);
         $pad = $pbd * (1-(($data->adc+$data->it)/100));
         //$pad = $pbd - ($data->adc+$data->it);
         $npv = $pad/pow((1+($data->dr/100)), $i+1);
         $ip += $npv;
-         
+        
+        $r= $r*(105/100);
+        $r=$r*(100.01/100);
+
     }
     
     addResult('Market Method', $ip);
@@ -95,22 +94,24 @@ function profitSplitMethod($data)
     
     $data->yr = $data->yr > 0 ? $data->yr : 4;
     $ip = 0;
-    $pp= $data->pp;
-    $sv = $data->sv;
+    $psh = 25;
+    $r = $data->r * ($data->g/100);
     
     for ($i = 0; $i< $data->yr; $i++) {
-        $pp= $pp*($pr[$i]/100);
-        $sv=$sv*($g[$i]/100);
-        $r = $pp * $sv;
         
         $ope = $r* ($data->opx/100);
         $ifc = $r* ($data->ifx/100);
         
         
         $tp=$r-($ope+$ifc);
-        $pex =$tp*($data->psh/100);
+        $pex =$tp*(25/100);
         
+        error_log($pex);
         $ip += $pex;
+        
+        $r= $r*(105/100);
+        $r=$r*(100.01/100);
+
     }
     
     addResult('Profit Split Method', $ip);
