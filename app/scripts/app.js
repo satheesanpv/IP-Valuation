@@ -16,7 +16,8 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'autocomplete'
+    'autocomplete',
+    'textAngular'
   ])
     .constant('AUTH_EVENTS', {
         loginSuccess: 'auth-login-success',
@@ -113,9 +114,9 @@ angular
                 }
             })
             .when('/faq', {
-              templateUrl: 'views/faq.html',
-              controller: 'FaqCtrl',
-              controllerAs: 'faq'
+                templateUrl: 'views/faq.html',
+                controller: 'FaqCtrl',
+                controllerAs: 'ctrl'
             })
             .otherwise({
                 redirectTo: '/'

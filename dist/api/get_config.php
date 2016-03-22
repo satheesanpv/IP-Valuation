@@ -21,10 +21,10 @@ if ($request->handleOptions()) {
     exit;
 }
 
-if (!$request->validate()) {
-    error_log('Validation failed. Not authorized!!');
+/*if (!$request->validate()) {
+  error_log('Validation failed. Not authorized!!');
     exit;
-}
+} */
 
 $input = $request->getJSON();
 
