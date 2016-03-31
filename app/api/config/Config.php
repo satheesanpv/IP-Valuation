@@ -20,4 +20,10 @@ class Config
     const DB_NAME = 'valuation';
     
     const SERVER_NAME = 'naarm.ernet.in';
+    
+    const SMTP_HOST = "smtp.gmail.com";
+    const MAIL_USER = "ip.naarm@gmail.com";
+    const MAIL_PASSWORD = "manojpsamuel";
+    const MAIL_FROM = "ip.naarm@gmail.com";
+    const FROM_NAME = "IP";
 }

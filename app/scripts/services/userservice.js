@@ -68,6 +68,28 @@ angular.module('ipValuationApp')
                 });
         };
 
+        self.approveUser = function (userId) {
+            var user = {}
+            user.userId = userId;
+            return $http
+                .post(baseURL + '/approve_user.php', user)
+                .then(function (res) {
+                    //$window.sessionStorage.userInfo = JSON.stringify(user);
+                    return res.data;
+                });
+        };
+
+        self.deleteUser = function (userId) {
+            var user = {}
+            user.userId = userId;
+            return $http
+                .post(baseURL + '/delete_user.php', user)
+                .then(function (res) {
+                    //$window.sessionStorage.userInfo = JSON.stringify(user);
+                    return res.data;
+                });
+        };
+
         self.updateProfile = function (user) {
             return $http
                 .post(baseURL + '/update_profile.php', user)

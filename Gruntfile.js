@@ -373,11 +373,11 @@ module.exports = function (grunt) {
         copy: {
             dist: {
                 files: [{
-                        expand: true,
-                        dot: true,
-                        cwd: '<%= yeoman.app %>',
-                        dest: '<%= yeoman.dist %>',
-                        src: [
+                    expand: true,
+                    dot: true,
+                    cwd: '<%= yeoman.app %>',
+                    dest: '<%= yeoman.dist %>',
+                    src: [
             '*.{ico,png,txt}',
             '.htaccess',
             '*.html',
@@ -390,27 +390,31 @@ module.exports = function (grunt) {
                         'sql/*'
           ]
         }, {
-                        expand: true,
-                        cwd: '.tmp/images',
-                        dest: '<%= yeoman.dist %>/images',
-                        src: ['generated/*']
+                    expand: true,
+                    cwd: '.tmp/images',
+                    dest: '<%= yeoman.dist %>/images',
+                    src: ['generated/*']
         }, {
-                        expand: true,
-                        cwd: 'bower_components/bootstrap/dist',
-                        src: 'fonts/*',
-                        dest: '<%= yeoman.dist %>'
+                    expand: true,
+                    cwd: 'bower_components/bootstrap/dist',
+                    src: 'fonts/*',
+                    dest: '<%= yeoman.dist %>'
         }, {
-                        expand: true,
-                        cwd: '<%= yeoman.app %>',
-                        src: 'api/**',
-                        dest: '<%= yeoman.dist %>',
+                    expand: true,
+                    cwd: '<%= yeoman.app %>',
+                    src: 'api/**',
+                    dest: '<%= yeoman.dist %>',
         }, {
-                        expand: true,
-                        cwd: 'bower_components/font-awesome',
-                        src: 'fonts/*',
-                        dest: '<%= yeoman.dist %>'
-        }
-                       ]
+                    expand: true,
+                    cwd: 'bower_components/font-awesome',
+                    src: 'fonts/*',
+                    dest: '<%= yeoman.dist %>'
+        }, {
+                    expand: true,
+                    cwd: 'bower_components/ngWYSIWYG/dist/',
+                    src: 'images/*',
+                    dest: '<%= yeoman.dist %>/styles/'
+        }]
 
             },
             styles: {

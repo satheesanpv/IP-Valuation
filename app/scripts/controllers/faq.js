@@ -8,9 +8,11 @@
  * Controller of the ipValuationApp
  */
 angular.module('ipValuationApp')
-    .controller('FaqCtrl', ['dataService', 'userService', '$timeout', function (dataService, userService, $timeout) {
+    .controller('FaqCtrl', ['dataService', 'userService', '$timeout', '$scope', '$q', '$window', function (dataService, userService, $timeout, $scope, $q, $window) {
 
         var self = this;
+        var $ = $window.jQuery;
+
         self.showEdit = false;
         self.loading = true;
         self.showError = false;
@@ -19,10 +21,53 @@ angular.module('ipValuationApp')
         self.user = userService.getUser();
         self.isAdmin = self.user.role === 'Admin';
 
+        self.editorConfig = {
+            sanitize: false,
+            toolbar: [
+                {
+                    name: 'basicStyling',
+                    items: ['bold', 'italic', 'underline', 'strikethrough', 'subscript', 'superscript', '-', 'leftAlign', 'centerAlign', 'rightAlign', 'blockJustify', '-']
+                },
+                {
+                    name: 'paragraph',
+                    items: ['orderedList', 'unorderedList', 'outdent', 'indent', '-']
+                },
+                {
+                    name: 'doers',
+                    items: ['removeFormatting', 'undo', 'redo', '-']
+                },
+                {
+                    name: 'colors',
+                    items: ['fontColor', 'backgroundColor', '-']
+                },
+                {
+                    name: 'links',
+                    items: ['image', 'hr', 'symbols', 'link', 'unlink', '-']
+                },
+                {
+                    name: 'tools',
+                    items: ['print', '-']
+                },
+                {
+                    name: 'styling',
+                    items: ['font', 'size', 'format']
+                },
+		]
+        };
+
+        $timeout(function () {
+            $('[ng-model="font"] option[value="?"]').text('Font');
+            $('[ng-model="fontsize"] option[value="?"]').text('Size');
+            $('[ng-model="textstyle"] option[value="?"]').text('Style');
+        }, 5);
+
 
         dataService.getConfig('faq').then(function (data) {
             self.faq = data;
             console.log(data);
+            //$('[ng-model="font"] option[value="?"]').prepend('<option value="" selected >Font</option>');
+
+            console.log($('[ng-model="font"]'));
         }).finally(function () {
             self.loading = false;
         });

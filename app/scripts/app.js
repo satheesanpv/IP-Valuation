@@ -17,7 +17,7 @@ angular
     'ngSanitize',
     'ngTouch',
     'autocomplete',
-    'textAngular'
+    'ngWYSIWYG'
   ])
     .constant('AUTH_EVENTS', {
         loginSuccess: 'auth-login-success',
@@ -58,11 +58,6 @@ angular
                 templateUrl: 'views/createuser.html',
                 controller: 'CreateuserCtrl',
                 controllerAs: 'ctrl',
-                requireLogin: true,
-                data: {
-                    authorizedRoles: [USER_ROLES.admin]
-                }
-
             })
             .when('/myValuations', {
                 templateUrl: 'views/myvaluations.html',

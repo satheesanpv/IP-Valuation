@@ -38,7 +38,7 @@ class DbUtils
         }
     }
     
-    public function getUser($username = null, $id = null)
+    public function getUser($username = null, $id = null, $role=null)
     {
         
         $dbh = $this->dbh;
@@ -50,8 +50,8 @@ class DbUtils
         /*
         * We will fetch user id and password fields for the given username
         */
-        $sql = "SELECT iduser, name, password, username, email, mobile, role, institute
-                FROM   user  ";
+        $sql = "SELECT iduser, name, password, username, email, mobile, role, institute, status
+                FROM   user ";
         
         if ($username) {
             $sql .=  "WHERE username = :username";
@@ -60,14 +60,24 @@ class DbUtils
         if ($id) {
             $sql .=  "WHERE iduser = :id";
         }
+        
+        if ($role) {
+            $sql .= "WHERE role= :role";
+        }
 
         error_log($sql);
         $stmt = $dbh->prepare($sql);
         
         if ($username) {
             $stmt->bindParam(':username', $username); 
-        } else {
+        } 
+        
+        if($id) {
             $stmt->bindParam(':id', $id);
+        }
+        
+        if ($role) {
+            $stmt->bindParam(':role', $role);
         }
         
         $stmt->execute();
@@ -90,9 +100,9 @@ class DbUtils
         
         $password = password_hash($user->password, PASSWORD_DEFAULT);
         $sql = "insert into user 
-                (name, password, username, email, role, institute)
+                (name, password, username, email, role, institute, status)
                 values 
-                (:name, :password, :username, :email, :role, :institute)";
+                (:name, :password, :username, :email, :role, :institute, :status)";
         
         $stmt = $dbh->prepare($sql);
         
@@ -102,6 +112,7 @@ class DbUtils
         $stmt->bindValue(':email', $user->email);
         $stmt->bindValue(':role', $user->role);
         $stmt->bindValue(':institute', $user->institute);
+        $stmt->bindValue(':status', $user->status);
         
         try {
             $stmt->execute();
@@ -134,6 +145,58 @@ class DbUtils
             $stmt->execute();
         } catch (\PDOException $e) {
             error_log('update failed: ' . $e->getMessage());
+            return "FAILED";
+        }
+        
+        return "SUCCESS";
+    }    
+    
+    public function approveUser($userId)
+    {
+        $dbh = $this->dbh;
+        
+        if ($dbh == null) {
+            return "Database connection failed";
+        }
+        
+        $sql = "update user set status= 'Approved' where iduser = :id";
+        
+        $stmt = $dbh->prepare($sql);
+        
+        $stmt->bindParam(':id', $userId);
+        
+        try {
+            $stmt->execute();
+        } catch (\PDOException $e) {
+            error_log('update failed: ' . $e->getMessage());
+            return "FAILED";
+        }
+        
+        return "SUCCESS";
+    }    
+    
+    public function deleteUser($userId)
+    {
+        $dbh = $this->dbh;
+        
+        if ($dbh == null) {
+            return "Database connection failed";
+        }
+        
+        if ($userId == null) {
+            return "No userId given!!";
+        }
+        
+        $sql = "delete from user where iduser = :id";
+        
+        $stmt = $dbh->prepare($sql);
+        
+        $stmt->bindParam(':id', $userId);
+        
+        try {
+            $stmt->execute();
+        } catch (\PDOException $e) {
+            error_log('delete failed: ' . $e->getMessage());
             return "FAILED";
         }
         

@@ -11,6 +11,8 @@ angular.module('ipValuationApp')
     .controller('CreateuserCtrl', ['userService', '$window', '$route', 'dataService', function (userService, $window, $route, dataService) {
         var self = this;
         var $ = $window.jQuery;
+        var loggedUser = userService.getUser();
+
 
         if (self.showResult) {
             self.showResult = false;
@@ -24,6 +26,10 @@ angular.module('ipValuationApp')
         self.showResult = false;
         self.user.role = 'User';
         self.instituteList = [];
+
+        if (loggedUser.role === 'Admin') {
+            self.isAdmin = true;
+        }
 
         dataService.getConfig('institutes').then(function (data) {
             angular.forEach(data, function (obj) {
@@ -42,6 +48,9 @@ angular.module('ipValuationApp')
         };
 
         self.createUser = function () {
+            self.showError = false;
+            self.loading = true;
+
             userService.createUser(self.user).then(function (data) {
                 if (data.message === 'SUCCESS') {
                     self.showForm = false;
@@ -57,7 +66,9 @@ angular.module('ipValuationApp')
                 self.errMsg = 'Unable to process the request now. Please try again later';
                 self.showError = true;
                 self.scrollTo($('body'));
+            }).finally(function () {
+                self.loading = false;
             });
         };
 
-    }]);
+}]);

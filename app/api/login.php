@@ -58,6 +58,18 @@ try {
          */
         error_log("password: ". $rs['password'], 0);
         if (password_verify($password, $rs['password'])) {
+            
+            if($rs['status'] == 'Pending') {
+                error_log($rs['status']);
+                header('HTTP/1.0 401 Unauthorized');
+                
+                $unencodedArray = [
+                    'message' => 'Pending Approval!!',
+                ];
+            
+                echo json_encode($unencodedArray);
+                exit;
+            } 
 
             $tokenId    = base64_encode(mcrypt_create_iv(32));
             $issuedAt   = time();

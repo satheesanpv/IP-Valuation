@@ -56,7 +56,7 @@
                                 <span class="help-block text-danger" ng-show="!createUser.password_c.$error.required && createUser.password_c.$error.noMatch && createUser.password.$dirty">Passwords do not match.</span>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" ng-show="ctrl.isAdmin">
                             <label for="Role" class="col-xs-4 control-label">Role</label>
                             <div class="col-xs-6">
                                 <select class="form-control" name="role" ng-model="ctrl.user.role">
@@ -66,56 +66,71 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="Role" class="col-xs-4 control-label">Institute</label>
+                            <label for="Role" class="col-xs-4 control-label">Institute*</label>
                             <div class="col-xs-6">
-                                <autocomplete name="institute" ng-model="ctrl.user.institute" attr-placeholder="institute" data="ctrl.instituteList" click-activation=true attr-input-class="form-control" autocomplete-required></autocomplete>
+                                <autocomplete name="institute" ng-model="ctrl.user.institute" attr-placeholder="institute" data="ctrl.instituteList" click-activation=true attr-input-class="form-control" autocomplete-required required></autocomplete>
                             </div>
                         </div>
-                        <hr>
+                        <!--
                         <div class="form-group">
-                            <div class="text-center col-xs-12">
-                                <button type="submit" class="btn btn-primary" ng-disabled="!createUser.$valid">Sign Up</button>
+                            <div class=" col-xs-6 g-recaptcha " data-sitekey="6Le3uBsTAAAAAHXZqnyylSrV1EQKT6-rRBXGJWtc "></div>
+                        </div>
+-->
+                        <hr>
+                        <div class="form-group " ng-hide="ctrl.loading">
+                            <div class="text-center col-xs-12 ">
+                                <button type="submit " class="btn btn-primary " ng-disabled="createUser.$invalid ">Sign Up</button>
                             </div>
+                        </div>
+                        <div ng-show="ctrl.loading" class="text-center col-xs-12 ">
+                            <img src="images/loader.gif"><span class="text-primary bold"><strong>&nbsp;&nbsp;Creating ...</strong></span>
+                            <br>
+                            <br>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    <div ng-show="ctrl.showResult" id="result">
-        <div class="col-sm-offset-1 col-sm-9">
-            <div class="panel panel-success">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><strong>User</strong></h3>
+    <div ng-show="ctrl.showResult " id="result ">
+        <div class="col-sm-offset-1 col-sm-9 ">
+            <div class="panel panel-success ">
+                <div class="panel-heading ">
+                    <h3 class="panel-title "><strong>User</strong></h3>
                 </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <label class="col-xs-5 text-right">Id</label>
-                        <span class="col-xs-6">{{ctrl.user.iduser}}</span>
+                <div class="panel-body ">
+                    <div class="row ">
+                        <label class="col-xs-5 text-right ">Id</label>
+                        <span class="col-xs-6 ">{{ctrl.user.iduser}}</span>
                     </div>
-                    <div class="row">
-                        <label class="col-xs-5 text-right">Name</label>
-                        <span class="col-xs-6">{{ctrl.user.name}}</span>
+                    <div class="row ">
+                        <label class="col-xs-5 text-right ">Name</label>
+                        <span class="col-xs-6 ">{{ctrl.user.name}}</span>
                     </div>
-                    <div class="row">
-                        <label class="col-xs-5 text-right">Username</label>
-                        <span class="col-xs-6">{{ctrl.user.username}}</span>
+                    <div class="row ">
+                        <label class="col-xs-5 text-right ">Username</label>
+                        <span class="col-xs-6 ">{{ctrl.user.username}}</span>
                     </div>
-                    <div class="row">
-                        <label class="col-xs-5 text-right" for="type">Email</label>
+                    <div class="row ">
+                        <label class="col-xs-5 text-right " for="type ">Email</label>
                         <span class="col-xs-6 ">{{ctrl.user.email}}</span>
                     </div>
-                    <div class="row">
-                        <label class="col-xs-5 text-right" for="type">Mobile</label>
+                    <div class="row ">
+                        <label class="col-xs-5 text-right " for="type ">Mobile</label>
                         <span class="col-xs-6 ">{{ctrl.user.mobile}}</span>
                     </div>
-                    <div class="row">
-                        <label class="col-xs-5 text-right" for="type">Role</label>
+                    <div class="row " ng-show="ctrl.isAdmin ">
+                        <label class="col-xs-5 text-right " for="type ">Role</label>
                         <span class="col-xs-6 ">{{ctrl.user.role}}</span>
                     </div>
-                    <div class="row">
-                        <label class="col-xs-5 text-right" for="type">Institute</label>
+                    <div class="row ">
+                        <label class="col-xs-5 text-right " for="type ">Institute</label>
                         <span class="col-xs-6 ">{{ctrl.user.institute}}</span>
+                    </div>
+                    <div class="row ">
+                        <label class="col-xs-5 text-right " for="type ">Status</label>
+                        <span ng-show="!ctrl.isAdmin " class="col-xs-6 text-danger "><strong>Pending</strong></span>
+                        <span ng-show="ctrl.isAdmin " class="col-xs-6 text-success ">Approved</span>
                     </div>
                 </div>
             </div>

@@ -3,7 +3,12 @@
         <div class="col-md-12">
             <h2 class="text-center">Login</h2>
             <hr>
+
             <form class="form-horizontal" ng-submit="login()">
+                <div id="errorDiv" class="col-sm-offset-4 col-sm-5 alert alert-danger" ng-show="showError">
+                    <a ng-href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Error!</strong> {{errMsg}}
+                </div>
                 <div class="form-group">
                     <label for="Username" class="col-sm-5 control-label">Username</label>
                     <div class="col-sm-4">
@@ -20,6 +25,7 @@
                 <div class="form-group">
                     <div class="col-sm-offset-6 col-sm-6">
                         <button type="submit" class="btn btn-primary">Sign in</button>
+                        <a type="button" href="#/createUser" class="btn btn-success">Sign Up</a>
                     </div>
                 </div>
             </form>

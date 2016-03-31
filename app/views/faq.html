@@ -11,7 +11,7 @@
         <strong>SUCCESS</strong> FAQ updated!!
     </div>
     <div ng-show="ctrl.loading">
-        <img src="../images/loader.gif"><span class="text-primary bold"><strong>&nbsp;&nbsp;Loading ...</strong></span>
+        <img src="images/loader.gif"><span class="text-primary bold"><strong>&nbsp;&nbsp;Loading ...</strong></span>
         <br>
         <br>
     </div>
@@ -25,7 +25,10 @@
     <div ng-show="!ctrl.showEdit" data-ng-bind-html="ctrl.faq">
     </div>
     <div ng-show="ctrl.showEdit">
-        <div text-angular ng-model="ctrl.faq"></div>
+        <!-- <div text-angular ng-model="ctrl.faq"></div> 
+        <wysiwyg textarea-id="question" textarea-class="form-control" textarea-height="600px" textarea-name="textareaQuestion" textarea-required ng-model="ctrl.faq" enable-bootstrap-title="true"></wysiwyg> 
+-->
+        <wysiwyg-edit content="ctrl.faq" econfig="ctrl.editorConfig" api="ctrl.api"></wysiwyg-edit>
     </div>
     <div ng-show="ctrl.showEdit" class="btn-group pull-right">
         <button class="btn btn-success btn-sm" ng-click="ctrl.save()">Save</button>

@@ -20,15 +20,24 @@ angular.module('ipValuationApp')
 
         $scope.login = function () {
             $scope.loginFailed = false;
+            $scope.showError = false;
             userService.login($scope.credentials).then(function (user) {
                 $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
                 console.log('Login success');
                 $location.path('#/home');
                 console.log($location.path())
                     //$scope.setCurrentUser(user);
-            }, function () {
+            }, function (response) {
                 $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
-                $scope.loginFailed = true;
+
+                var data = response.data;
+                console.log(data);
+                if (data.message) {
+                    $scope.showError = true;
+                    $scope.errMsg = data.message;
+                } else {
+                    $scope.loginFailed = true;
+                }
             });
         };
 }]);
