@@ -85,6 +85,12 @@ class Request
     {
         return $this->headers[$header];
     }
+    
+    public function setHeader($header, $value) {
+        //echo $value;
+        $this->headers[$header] = $value;
+        //print_r($this->headers);
+    }
   
     public function getJSON()
     {
@@ -96,7 +102,7 @@ class Request
     {
 
         $authHeader = $this->getHeader('Authorization');
-    
+        //error_log($authHeader);
         if (!$authHeader) {
         /*
         * The request lacks the authorization token
@@ -106,7 +112,7 @@ class Request
             return false;
         }
     
-        //error_log($authHeader);
+       
         list($jwt) = sscanf($authHeader, 'Bearer %s');
 
         //error_log($jwt);

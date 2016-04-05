@@ -2,6 +2,11 @@
     <div class="page-header">
         <h2 class="text-center text-success">{{ctrl.type}} IP Valuations</h2>
     </div>
+    <div ng-show="ctrl.loading" class="text-center">
+        <img src="images/loader.gif"><span class="text-primary bold"><strong>&nbsp;&nbsp;Loading ...</strong></span>
+        <br>
+        <br>
+    </div>
     <div id="errorDiv" class="alert alert-danger" ng-show="ctrl.showError">
         <a ng-href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>Error!</strong> {{ctrl.errMsg}}
@@ -17,7 +22,11 @@
                     <th>Method</th>
                     <th>IP Valuation</th>
                     <th ng-show="ctrl.isAdmin">User Name</th>
-                    <th class="text-center">Action</th>
+                    <th class="text-center">Action
+                        <button type="button" class="btn btn-success btn-xs" aria-label="Left Align" ng-click="ctrl.download()" title="Donwload as Excel">
+                            <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+                        </button>
+                    </th>
                 </tr>
             </thead>
             <tbody>
