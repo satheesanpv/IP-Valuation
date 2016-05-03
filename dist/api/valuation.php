@@ -39,7 +39,7 @@ function royaltyMethod($data)
     $data->yr = $data->yr > 0 ? $data->yr : 4;
     $ip = 0;
     
-    $r = $data->r*($data->g/100);
+    $r = $data->r;
     
     for ($i = 0; $i< $data->yr; $i++) {
         
@@ -50,9 +50,7 @@ function royaltyMethod($data)
         error_log($npv);
         $ip += $npv;
         
-        $r= $r*(105/100);
-        $r=$r*(100.01/100);
-
+        $r= $r*($data->g/100);
          
     }
     
@@ -66,9 +64,8 @@ function marketMethod($data)
     
     $data->yr = $data->yr > 0 ? $data->yr : 4;
     $ip = 0;
-    $r= $data->rm * ($data->pr/100);
-    $r = $data->rm * ($data->g/100);
-    
+    $r= $data->rm;
+
     for ($i = 0; $i< $data->yr; $i++) {
         error_log($i);
         
@@ -78,8 +75,8 @@ function marketMethod($data)
         $npv = $pad/pow((1+($data->dr/100)), $i+1);
         $ip += $npv;
         
-        $r= $r*(105/100);
-        $r=$r*(100.01/100);
+        $r= $r* ($data->pr/100);;
+        $r=$r*($data->g/100);
 
     }
     
@@ -94,8 +91,9 @@ function profitSplitMethod($data)
     
     $data->yr = $data->yr > 0 ? $data->yr : 4;
     $ip = 0;
-    $psh = 25;
-    $r = $data->r * ($data->g/100);
+    $psh = $data->psh > 0 ? $data->psh : 25;
+        
+    $r = $data->r;
     
     for ($i = 0; $i< $data->yr; $i++) {
         
@@ -104,14 +102,13 @@ function profitSplitMethod($data)
         
         
         $tp=$r-($ope+$ifc);
-        $pex =$tp*(25/100);
+        $pex =$tp*($psh/100);
         
         error_log($pex);
         $ip += $pex;
         
-        $r= $r*(105/100);
-        $r=$r*(100.01/100);
-
+        $r = $r * ($data->g/100);
+        
     }
     
     addResult('Profit Split Method', $ip);

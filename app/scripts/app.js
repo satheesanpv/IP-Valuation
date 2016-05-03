@@ -47,6 +47,7 @@ angular
             .when('/valuation/', {
                 templateUrl: 'views/valuation.html',
                 controller: 'ValuationCtrl',
+                controllerAs: 'ctrl',
                 requireLogin: true
             })
             .when('/login', {

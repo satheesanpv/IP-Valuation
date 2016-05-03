@@ -48,6 +48,233 @@ angular.module('ipValuationApp')
         self.pricingStratagy = ['Same as competing product', 'Skimming', 'Penetrating', 'NA'];
         self.expectedGrowth = ['Business as Usual', 'Slow pace of technology adoption', 'Upside scenario', 'NA'];
 
+        self.technologyValues = {
+            'Agriculture Engineering & ICT': {
+                'Irrigation and Water Management Equipments': {
+                    'd': 10,
+                    'it': 30,
+                    'ry': 5,
+                    'g': 18,
+                    'adc': 10,
+                    'psh': 25,
+                    'dr': 12
+                },
+                'Machinery and Farm Equipments': {
+                    'd': 10,
+                    'it': 30,
+                    'ry': 2.5,
+                    'g': 11,
+                    'adc': 10,
+                    'psh': 20,
+                    'dr': 12
+                },
+                'Post Harvest processes and Products': {
+                    'd': 10,
+                    'it': 30,
+                    'ry': 3,
+                    'g': 7,
+                    'adc': 10,
+                    'psh': 15,
+                    'dr': 12
+                },
+                'Renewable Energy Gadgets': {
+                    'd': 10,
+                    'it': 30,
+                    'ry': 2.67,
+                    'g': 15,
+                    'adc': 10,
+                    'psh': 25,
+                    'dr': 12
+                },
+                'Electronics*': {
+                    'd': 10,
+                    'it': 30,
+                    'ry': 2,
+                    'g': 6.8,
+                    'adc': 10,
+                    'psh': 25,
+                    'dr': 12
+                },
+                'Softwares and DSS*': {
+                    'd': 10,
+                    'it': 30,
+                    'ry': 2,
+                    'g': 5,
+                    'adc': 10,
+                    'psh': 25,
+                    'dr': 12
+                }
+            },
+            'Animal Science': {
+                'Animal Genetic Resources': {
+                    'd': 10,
+                    'it': 30,
+                    'ry': 5,
+                    'g': 8,
+                    'adc': 10,
+                    'psh': 25,
+                    'dr': 12
+                },
+                'Animal Production and Health': {
+                    'd': 10,
+                    'it': 30,
+                    'ry': 20,
+                    'g': 6.1,
+                    'adc': 10,
+                    'psh': 25,
+                    'dr': 12
+                },
+                'Diagnostics and Vaccines': {
+                    'd': 10,
+                    'it': 30,
+                    'ry': 12.5,
+                    'g': 7.5,
+                    'adc': 10,
+                    'psh': 10,
+                    'dr': 12
+                },
+                'Animal Products Technology': {
+                    'd': 10,
+                    'it': 30,
+                    'ry': 5,
+                    'g': 15,
+                    'adc': 10,
+                    'psh': 25,
+                    'dr': 12
+                }
+            },
+            'Crop Science': {
+                'Crop Production and Propagation Technologies': {
+                    'd': 10,
+                    'it': 30,
+                    'ry': 2.5,
+                    'g': 8,
+                    'adc': 10,
+                    'psh': 25,
+                    'dr': 12
+                },
+                'Crop Protection technologies': {
+                    'd': 10,
+                    'it': 30,
+                    'ry': 2,
+                    'g': 5.4,
+                    'adc': 10,
+                    'psh': 25,
+                    'dr': 12
+                },
+                'Plant varieties': {
+                    'd': 10,
+                    'it': 30,
+                    'ry': 13,
+                    'g': 8,
+                    'adc': 10,
+                    'psh': 15,
+                    'dr': 12
+                },
+                'Post Harvest and processing Technology': {
+                    'd': 10,
+                    'it': 30,
+                    'ry': 3,
+                    'g': 8,
+                    'adc': 10,
+                    'psh': 25,
+                    'dr': 12
+                }
+            },
+            'Fisheries': {
+                'Fish based Biochemistry technologies': {
+                    'd': 10,
+                    'it': 30,
+                    'ry': 2.5,
+                    'g': 8,
+                    'adc': 10,
+                    'psh': 25,
+                    'dr': 12
+                },
+                'Fish based food products': {
+                    'd': 10,
+                    'it': 30,
+                    'ry': 2.5,
+                    'g': 6,
+                    'adc': 10,
+                    'p': 25,
+                    'dr': 12
+                },
+                'Fish seed Production': {
+                    'd': 10,
+                    'it': 30,
+                    'ry': 2.5,
+                    'g': 5.72,
+                    'adc': 10,
+                    'psh': 25,
+                    'dr': 12
+                },
+                'Fish Nutrition': {
+                    'd': 10,
+                    'it': 30,
+                    'ry': 2.5,
+                    'g': 6,
+                    'adc': 10,
+                    'psh': 25,
+                    'dr': 12
+                }
+            },
+            'Horticulture': {
+                'Plant varieties': {
+                    'd': 10,
+                    'it': 30,
+                    'ry': 2.5,
+                    'g': 8,
+                    'adc': 10,
+                    'psh': 25,
+                    'dr': 12
+                },
+                'Crop Production and Propagation Technologies': {
+                    'd': 10,
+                    'it': 30,
+                    'ry': 3,
+                    'g': 12.5,
+                    'adc': 10,
+                    'psh': 25,
+                    'dr': 12
+                },
+                'Crop Protection technologies': {
+                    'd': 10,
+                    'it': 30,
+                    'ry': 3,
+                    'g': 5.4,
+                    'adc': 10,
+                    'psh': 25,
+                    'dr': 12
+                },
+                'Post Harvest and processing Technology': {
+                    'd': 10,
+                    'it': 30,
+                    'ry': 5,
+                    'g': 7.5,
+                    'adc': 10,
+                    'psh': 25,
+                    'dr': 12
+                }
+            },
+            'Other': {
+                'Other': {
+                    'd': 10,
+                    'it': 30,
+                    'ry': 5,
+                    'g': 1,
+                    'adc': 10,
+                    'psh': 25,
+                    'dr': 12
+                }
+            }
+        };
+
+        self.techNames = Object.keys(self.technologyValues);
+        self.techTypes = Object.keys(self.technologyValues[self.techNames[0]]);
+        self.techTypes.push('Other');
+
+
         self.changeRate = function (field) {
 
             var elem;
@@ -69,6 +296,7 @@ angular.module('ipValuationApp')
                 elem.prop('disabled', true);
             } else {
                 elem.prop('disabled', false);
+                self.data.g = 100 + self.defaultValues.g;
                 elem.focus();
             }
         };
@@ -92,20 +320,20 @@ angular.module('ipValuationApp')
         };
 
         $scope.$watch(function () {
-            return self.data.ppm
+            return self.data.ppm;
         }, self.updateRevenue);
 
         $scope.$watch(function () {
-            return self.data.sv
+            return self.data.sv;
         }, self.updateRevenue);
 
 
         $scope.$watch(function () {
-            return self.data.svm
+            return self.data.svm;
         }, self.updateRevenue);
 
         $scope.$watch(function () {
-            return self.data.pp
+            return self.data.pp;
         }, self.updateRevenue);
 
 
@@ -159,6 +387,7 @@ angular.module('ipValuationApp')
                 self.data.developedBy = user.name;
                 self.data.contactEmail = user.email;
                 self.data.contactMobile = user.mobile;
+                self.setDefaultValues();
 
 
                 //self.changeRate('pricingStratagy');
@@ -181,13 +410,29 @@ angular.module('ipValuationApp')
 
         self.changeTechTypes = function () {
 
-            self.techTypes = $filter('filter')(self.technologies, {
-                name: self.data.technology
-            }, true)[0].types;
+            self.techTypes = Object.keys(self.technologyValues[self.data.technology]);
 
-            self.techTypes.push('Other');
-
+            if (self.data.technology !== 'Other') {
+                self.techTypes.push('Other');
+            }
             self.data.techType = self.techTypes[0];
+        };
+
+        self.setDefaultValues = function () {
+
+            if (self.data.techType === 'Other') {
+                self.defaultValues = self.technologyValues.Other[self.data.techType];
+            } else {
+                self.defaultValues = self.technologyValues[self.data.technology][self.data.techType];
+            }
+
+            angular.forEach(self.defaultValues, function (value, key) {
+
+                if (key !== 'g') {
+                    self.data[key] = value;
+                }
+            });
+
         };
 
 

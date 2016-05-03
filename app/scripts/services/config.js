@@ -289,6 +289,16 @@ angular.module('ipValuationApp')
                     name: 'ifx',
                     label: 'Incremental Fixed Costs(%)',
                     filter: 'percentage'
+                },
+                {
+                    type: 'number',
+                    step: 0.01,
+                    min: 0,
+                    max: 100,
+                    name: 'psh',
+                    label: 'Expected Profit Share(%)',
+                    helpText: 'Expected Profit Share in Percentage',
+                    filter: 'percentage'
                 }
             ]
         }
