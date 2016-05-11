@@ -9,7 +9,7 @@
  */
 angular.module('ipValuationApp')
     .constant('configuration', {
-        apiBase: 'http://localhost/ip/api',
+        apiBase: 'api',
         technologies: [{
             name: 'Agriculture Engineering & ICT',
             types: ['Machinery and Farm Equipments', 'Post Harvest processes and Products', 'Renewable Energy Gadgets', 'Irrigation and Water Management Equipments', 'Electronics', 'Softwares and DSS']
