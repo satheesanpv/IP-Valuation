@@ -1,7 +1,9 @@
 <?php
   
 //chdir(dirname(__DIR__));
+//set_include_path('/var/www/valuation/ip/api/');
 require_once('vendor/JWT/JWT.php');
+require_once('lib/password.php');
 require_once('lib/Request.php');
 require_once('config/Config.php');
 require_once('lib/DbUtils.php');
@@ -57,8 +59,9 @@ try {
          * @see http://php.net/manual/en/ref.password.php
          */
         error_log("password: ". $rs['password'], 0);
+        error_log("password: ". password_hash($password, PASSWORD_DEFAULT), 0);
         if (password_verify($password, $rs['password'])) {
-            
+
             if($rs['status'] == 'Pending') {
                 error_log($rs['status']);
                 header('HTTP/1.0 401 Unauthorized');
@@ -70,8 +73,10 @@ try {
                 echo json_encode($unencodedArray);
                 exit;
             } 
-
-            $tokenId    = base64_encode(mcrypt_create_iv(32));
+		
+		error_log( "Token creating ...");
+            $tokenId    = base64_encode(mcrypt_create_iv(32, MCRYPT_RAND));
+		error_log( "Token creating done...");
             $issuedAt   = time();
             $notBefore  = $issuedAt + 10;  //Adding 10 seconds
             $expire     = $notBefore + Config::JWT_EXP_SECONDS; // Adding 60 seconds

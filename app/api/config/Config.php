@@ -15,7 +15,7 @@ class Config
     
     //DB config
     const DB_USER = 'ip';
-    const DB_PASSWORD   = 'test123';
+    const DB_PASSWORD   = 'XXXX';
     const DB_HOST      = 'localhost';
     const DB_NAME = 'valuation';
     
@@ -23,7 +23,7 @@ class Config
     
     const SMTP_HOST = "smtp.gmail.com";
     const MAIL_USER = "ip.naarm@gmail.com";
-    const MAIL_PASSWORD = "manojpsamuel";
+    const MAIL_PASSWORD = "XXXXXX";
     const MAIL_FROM = "ip.naarm@gmail.com";
     const FROM_NAME = "IP";
 }

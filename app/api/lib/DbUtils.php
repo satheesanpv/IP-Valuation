@@ -2,6 +2,7 @@
 //require_once('JWT/JWT.php');
 namespace IP;
 
+require_once('lib/password.php');
 use PDO;
 
 class DbUtils
