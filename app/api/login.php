@@ -140,7 +140,7 @@ try {
             header('HTTP/1.0 401 Unauthorized');
         }
     } else {
-        header('HTTP/1.0 404 Not Found');
+        header('HTTP/1.0 401 Unauthorized - User Not found');
     }
 } catch (Exception $e) {
     error_log($e, 0);

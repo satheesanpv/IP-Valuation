@@ -73,7 +73,7 @@ function marketMethod($data)
         $pad = $pbd * (1-(($data->adc+$data->it)/100));
         //$pad = $pbd - ($data->adc+$data->it);
         $npv = $pad/pow((1+($data->dr/100)), $i+1);
-        $ip += $npv;
+        $ip += $npv/4;
         
         $r= $r* ($data->pr/100);;
         $r=$r*($data->g/100);

@@ -65,7 +65,7 @@ angular.module('ipValuationApp')
                     type: 'number',
                     step: 0.01,
                     name: 'ppm',
-                    label: 'Price/Unit of Compiting Product',
+                    label: 'Price/Unit of competing Product',
                     filter: 'currency',
                     methods: ['market method'],
                     helpText: 'Similar existing colsely competing product price in INR'
@@ -84,7 +84,7 @@ angular.module('ipValuationApp')
                     type: 'number',
                     step: 0.01,
                     name: 'svm',
-                    label: 'Units Sold Annualy of Compiting Product*',
+                    label: 'Units Sold Annualy of competing Product*',
                     filter: 'number',
                     methods: ['market method'],
                     helpText: 'Expected Annual Sales Volume of similar closely competing product'
@@ -102,10 +102,10 @@ angular.module('ipValuationApp')
                     type: 'number',
                     step: 0.01,
                     name: 'rm',
-                    label: 'Expected Revenue of Compiting Product',
+                    label: 'Expected Revenue of competing Product',
                     filter: 'currency',
                     methods: ['market method'],
-                    helpText: 'Expected Revenue of the Compiting Product Annually',
+                    helpText: 'Expected Revenue of the competing Product Annually',
                     required: 'required'
                 },
                 {
